@@ -1,0 +1,30 @@
+{
+  "name": "ChromeGithubReminder",
+  "description": "Github Reminder for Engineers",
+  "version": "0.0.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": ["background/background.js", "lib/pull-request.js", "lib/storage.js", "lib/github.js"]
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "images/pika16.png",
+      "19": "images/pika19.png",
+      "38": "images/pika38.png",
+      "48": "images/pika48.png",
+      "128": "images/pika128.png"
+    },
+    "default_title": "Github Reminder",
+    "default_popup": "page_action/main/main.html"
+  },
+  "permissions" : [
+    "tabs", "storage", "alarms"
+  ],
+  "icons": {
+    "16": "images/pika16.png",
+    "19": "images/pika19.png",
+    "38": "images/pika38.png",
+    "48": "images/pika48.png",
+    "128": "images/pika128.png"
+  }
+}
