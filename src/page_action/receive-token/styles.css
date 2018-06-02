@@ -1,0 +1,16 @@
+body {
+    width: 300px;
+}
+.container {
+    width: 240px;
+    margin: 10px auto;
+}
+
+.input-wrapper {
+    margin: 10px 0;
+}
+
+.error-wrapper {
+    display: none;
+    color: #F44336;
+}
