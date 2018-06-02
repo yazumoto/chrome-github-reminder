@@ -1,0 +1,14 @@
+body {
+    width: 300px;
+}
+label {
+    display: inline-block;
+    width: 56px;
+}
+.container {
+    width: 240px;
+    margin: 32px auto;
+}
+.input-wrapper {
+    margin: 10px 0;
+}
