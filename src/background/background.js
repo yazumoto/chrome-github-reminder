@@ -13,7 +13,7 @@ chrome.alarms.onAlarm.addListener(function() {
   GRStorage.pullRequests().then(function(pullRequests) {
     pullRequests.forEach(function(pr) {
       Github.getPullRequest(pr).then(function(data) {
-        console.log(data);
+        // console.log(data);
         pr.compare(data).then(function(result) {
           if (result) {
             console.log('updated');
