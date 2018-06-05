@@ -1,7 +1,7 @@
 {
   "name": "ChromeGithubReminder",
   "description": "Github Reminder for Engineers",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "manifest_version": 2,
   "background": {
     "scripts": ["background/background.js", "lib/pull-request.js", "lib/storage.js", "lib/github.js"]
