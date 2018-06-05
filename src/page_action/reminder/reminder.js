@@ -33,4 +33,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
   // アップデートのあるPRを表示する
   UpdatedPullRequestListComponent.render();
+
+  // Links
+  document.getElementById('non-updated-list').addEventListener('click', function() {
+    document.location.href = '../list/list.html';
+  });
 });

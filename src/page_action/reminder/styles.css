@@ -29,3 +29,15 @@ body {
 .empty-message {
     display: none;
 }
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+}
+.link {
+    border-radius: 3px;
+    background-color: #E91E63;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+}
