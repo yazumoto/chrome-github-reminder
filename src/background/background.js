@@ -6,38 +6,47 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   }
 });
 // 定期実行
-chrome.alarms.create({delayInMinutes: 3}); // 起動時だけは、3分で実行する
-// chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
+// chrome.alarms.create({delayInMinutes: 3}); // 起動時だけは、3分で実行する
+chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
 chrome.alarms.onAlarm.addListener(function() {
   console.log('do!');
   GRStorage.pullRequests().then(function(pullRequests) {
     // closed なPRの削除
-    GRStorage.savePullRequests(pullRequests.filter(function(pr) {
+    return GRStorage.savePullRequests(pullRequests.filter(function (pr) {
       return !pr.isClosed();
     }));
-
+  }).then(function() {
+    return GRStorage.pullRequests();
+  }).then(function(pullRequests) {
     // PRのアップデートの確認
-    pullRequests.forEach(function(pr) {
-      Github.getPullRequest(pr).then(function(data) {
+    promises = pullRequests.map(function(pr) {
+      return Github.getPullRequest(pr).then(function(data) {
         if (PullRequest.isClosed(data)) {
+          console.log('delete');
+          console.log(pr.url);
           pr.close();
-          GRStorage.savePullRequests(pullRequests);
+          return GRStorage.savePullRequests(pullRequests);
         } else {
           // console.log(data);
-          pr.compare(data).then(function(result) {
+          return pr.compare(data).then(function(result) {
             if (result) {
               console.log('updated');
+              console.log(pr.url);
               pr.updated();
-              GRStorage.savePullRequests(pullRequests);
+              return GRStorage.savePullRequests(pullRequests);
             } else {
               console.log('not updated');
+              return Promise.resolve();
             }
           });
         }
       });
     });
+    // TODO: これは非同期になっているのでバグあり
+    return Promise.all(promises);
+  }).then(function() {
+    // chrome.alarms.create({delayInMinutes: 60});
+    chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
   });
-  chrome.alarms.create({delayInMinutes: 60});
-  // chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
 });
 
