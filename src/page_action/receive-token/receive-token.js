@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           console.log('success!');
           chrome.storage.sync.set({githubToken: token}, function () {
             console.log('Value is set to ' + token);
+            document.location.href = '../reminder/reminder.html';
           });
         } else {
           console.log('failed');

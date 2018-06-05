@@ -1,8 +1,11 @@
 // Status
 // read -> updated -> read
 function PullRequest(object) {
+  // Pull Request State in Github
+  this.state = object.state || 'open';
   this.title = object.title;
   this.url = object.url;
+  // Status for This Extension
   this.status = object.status || 'read';
   this.commits = object.commits || 0;
   this.comments = object.comments || 0;
@@ -16,15 +19,13 @@ function PullRequest(object) {
 }
 
 // Instance Methods
-PullRequest.prototype.read = function () {
-  this.status = 'read';
-};
-PullRequest.prototype.updated = function () {
-  this.status = 'updated';
-};
-PullRequest.prototype.isUpdated = function () {
-  return this.status === 'updated';
-};
+PullRequest.prototype.read = function () { this.status = 'read'; };
+PullRequest.prototype.updated = function () { this.status = 'updated'; };
+PullRequest.prototype.isUpdated = function () { return this.status === 'updated'; };
+
+PullRequest.prototype.close = function() { this.state = 'closed'; };
+PullRequest.prototype.isClosed = function() { return this.state === 'closed'; };
+
 PullRequest.prototype.compare = function (prFromGithub) {
   return new Promise(function (resolve, reject) {
     if (prFromGithub.commits > this.commits || prFromGithub.comments > this.comments || prFromGithub.review_comments > this.reviewComments) {
@@ -50,4 +51,7 @@ PullRequest.get = function (url) {
         reviewComments: data.review_comments
       });
     });
+};
+PullRequest.isClosed = function(prFromGithub) {
+  return prFromGithub.state === 'closed';
 };

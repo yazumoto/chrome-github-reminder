@@ -17,7 +17,7 @@ GRStorage.findPullRequestFromUrl = function(url) {
 GRStorage.pullRequests = function() {
   return new Promise(function(resolve, reject) {
     chrome.storage.sync.get(['pullRequests'], function(result){
-      resolve(result.pullRequests.map(function(pr) {
+      resolve((result.pullRequests || []).map(function(pr) {
         return new PullRequest(pr);
       }));
     });
