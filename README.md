@@ -1,5 +1,24 @@
 # Chrome Github Reminder
-- できるリスト
+# インストール方法
+
+Version 1 になるまでは、拡張機能登録をしないので、ローカルでインストールする必要があります。
+
+1. このレポジトリをクローン `git clone git@github.com:seteen/chrome-github-reminder.git`
+2. クロームの拡張機能ページを開く
+3. クローンしたレポジトリを Finder でドラッグアンドドロップ
+
+
+# 更新
+
+1. レポジトリをPull
+2. クローム拡張機能ページを開く
+3. 拡張機能の更新ボタンを押す
+
+# Contribution
+
+Just make pull request!! No RULES!!
+
+# できることリスト
 
 - [x] GithubのTokenの認証
 - [x] Pull Requestのページなら、保存できる
