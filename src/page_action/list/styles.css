@@ -1,0 +1,43 @@
+body {
+    width: 300px;
+    max-height: 800px;
+    color: #424242;
+}
+.container {
+    width: 240px;
+    margin: 10px auto;
+}
+.save-button {
+    display: none;
+    border-radius: 3px;
+    background-color: #66BB6A;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+}
+
+.pr-list-container {
+    margin: 15px auto;
+}
+.pull-request {
+    margin: 10px auto;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    border: 1px solid #A5D6A7;
+}
+.empty-message {
+    display: none;
+}
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+}
+.link {
+    border-radius: 3px;
+    background-color: #E91E63;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+}
