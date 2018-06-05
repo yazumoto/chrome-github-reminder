@@ -6,8 +6,8 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   }
 });
 // 定期実行
-// chrome.alarms.create({delayInMinutes: 3}); // 起動時だけは、3分で実行する
-chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
+chrome.alarms.create({delayInMinutes: 3}); // 起動時だけは、3分で実行する
+// chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
 chrome.alarms.onAlarm.addListener(function() {
   console.log('do!');
   GRStorage.pullRequests().then(function(pullRequests) {
@@ -45,8 +45,8 @@ chrome.alarms.onAlarm.addListener(function() {
     // TODO: これは非同期になっているのでバグあり
     return Promise.all(promises);
   }).then(function() {
-    // chrome.alarms.create({delayInMinutes: 60});
-    chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
+    chrome.alarms.create({delayInMinutes: 60});
+    // chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
   });
 });
 
