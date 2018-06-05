@@ -11,18 +11,29 @@ chrome.alarms.create({delayInMinutes: 60});
 chrome.alarms.onAlarm.addListener(function() {
   console.log('do!');
   GRStorage.pullRequests().then(function(pullRequests) {
+    // closed なPRの削除
+    GRStorage.savePullRequests(pullRequests.filter(function(pr) {
+      return !pr.isClosed();
+    }));
+
+    // PRのアップデートの確認
     pullRequests.forEach(function(pr) {
       Github.getPullRequest(pr).then(function(data) {
-        // console.log(data);
-        pr.compare(data).then(function(result) {
-          if (result) {
-            console.log('updated');
-            pr.updated();
-            GRStorage.savePullRequests(pullRequests);
-          } else {
-            console.log('not updasted');
-          }
-        });
+        if (PullRequest.isClosed(data)) {
+          pr.close();
+          GRStorage.savePullRequests(pullRequests);
+        } else {
+          // console.log(data);
+          pr.compare(data).then(function(result) {
+            if (result) {
+              console.log('updated');
+              pr.updated();
+              GRStorage.savePullRequests(pullRequests);
+            } else {
+              console.log('not updated');
+            }
+          });
+        }
       });
     });
   });
