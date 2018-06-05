@@ -25,7 +25,11 @@ GRStorage.pullRequests = function() {
 };
 
 GRStorage.savePullRequests = function(pullRequests) {
-  chrome.storage.sync.set({ pullRequests: pullRequests });
+  return new Promise(function(resolve, reject) {
+    chrome.storage.sync.set({ pullRequests: pullRequests }, function() {
+      resolve();
+    });
+  });
 };
 GRStorage.addNewPullRequest = function(newPr) {
   chrome.storage.sync.get(['pullRequests'], function(result){
