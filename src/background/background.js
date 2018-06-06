@@ -45,7 +45,7 @@ chrome.alarms.onAlarm.addListener(function() {
     // TODO: これは非同期になっているのでバグあり
     return Promise.all(promises);
   }).then(function() {
-    chrome.alarms.create({delayInMinutes: 60});
+    chrome.alarms.create({delayInMinutes: 15});
     // chrome.alarms.create({delayInMinutes: 0.1}); // This is for debugging
   });
 });
